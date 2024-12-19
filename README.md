@@ -104,7 +104,7 @@ keyUsage               = critical,keyCertSign,cRLSign # Key usages allowed.
 
 3. **Create the root certificate**:
    ```bash
-   openssl x509 -req -days 365 -extensions v3_ca -signkey ca.key -in ca.csr -out ca.crt
+   openssl x509 -req -days 365 -signkey ca.key -in ca.csr -out ca.crt -extfile ca.cnf -extensions v3_ca
    ```
 
 ## Instructions for Clients and Servers
