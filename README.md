@@ -116,12 +116,14 @@ keyUsage               = critical,keyCertSign,cRLSign # Key usages allowed.
    ```bash
    openssl genrsa -out client.key 2048
    openssl genrsa -out server.key 2048
+   openssl genrsa -out broker.key 2048
    ```
 
 3. **Create the CSRs**:
    ```bash
    openssl req -new -key client.key -out client.csr -config client.cnf
    openssl req -new -key server.key -out server.csr -config server.cnf
+   openssl req -new -key broker.key -out broker.csr -config broker.cnf
    ```
 
 4. **Sign the CSRs with the CA's certificate and private key**:
