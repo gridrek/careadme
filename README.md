@@ -126,8 +126,16 @@ keyUsage               = critical,keyCertSign,cRLSign # Key usages allowed.
 
 4. **Sign the CSRs with the CA's certificate and private key**:
    ```bash
-   openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out client.crt -days 365 -sha256
-   openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial -out server.crt -days 365 -sha256
+   openssl x509 -req -in client.csr -CA ca.crt -CAkey ca.key -CAcreateserial \
+    -out client.crt -days 365 -sha256 -extfile client.cnf -extensions v3_req
+   ```
+   ```bash
+   openssl x509 -req -in server.csr -CA ca.crt -CAkey ca.key -CAcreateserial \
+    -out server.crt -days 365 -sha256 -extfile server.cnf -extensions v3_req
+   ```
+   ```bash
+   openssl x509 -req -in broker.csr -CA ca.crt -CAkey ca.key -CAcreateserial \
+    -out broker.crt -days 365 -sha256 -extfile broker.cnf -extensions v3_req
    ```
 
 5. **Distribute the signed certificates**:
