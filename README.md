@@ -145,19 +145,32 @@ keyUsage               = critical,keyCertSign,cRLSign # Key usages allowed.
 
 ## Example `client.cnf`
 
-Below is an example configuration file for creating a client CSR:
+Below is an example configuration file for creating a server CSR:
 
 ```ini
 [ req ]
-default_bits        = 2048             # Key size in bits.
-default_md          = sha256           # Message digest for signing.
-prompt              = no               # Disable interactive prompts.
+default_bits        = 2048
+default_md          = sha256
+prompt              = no
 distinguished_name  = req_distinguished_name
+req_extensions      = v3_req
 
 [ req_distinguished_name ]
-C   = SE                              # Country name.
-ST  = Stockholm                       # State or province name.
-O   = STI                             # Organization name.
-OU  = Client Division                 # Organizational unit name.
-CN  = client.johan.se                 # Common name (e.g., client domain or identifier).
+C   = SE
+ST  = Stockholm
+O   = STI
+OU  = Web
+CN  = server.johan.se
+emailAddress = server@example.com
+
+[ v3_req ]
+subjectAltName = @alt_names
+
+[ alt_names ]
+DNS.1 = server.johan.se
+#DNS.2 = client.johan.se
+#DNS.3 = localhost
+#IP.1 = 127.0.0.1
+#IP.2 = 192.168.1.10
+
 ```
